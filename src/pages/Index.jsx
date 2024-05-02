@@ -7,6 +7,7 @@ const Index = () => {
   const [name, setName] = useState("");
   const [endDate, setEndDate] = useState("");
   const [dailyWeight, setDailyWeight] = useState("");
+  const [weighInDate, setWeighInDate] = useState(new Date().toLocaleDateString("en-US", { timeZone: "America/Chicago" }));
   const [habit, setHabit] = useState("");
   const [daysWithoutHabit, setDaysWithoutHabit] = useState(0);
   const [totalWeightLoss, setTotalWeightLoss] = useState(0);
@@ -26,6 +27,7 @@ const Index = () => {
       name,
       endDate,
       dailyWeight,
+      weighInDate,
       habit,
       totalWeightLoss,
       initialWeight: initialWeight || dailyWeight,
@@ -87,6 +89,8 @@ const Index = () => {
           <NumberInput precision={2} step={0.1}>
             <NumberInputField value={dailyWeight} onChange={(e) => setDailyWeight(e.target.value)} />
           </NumberInput>
+          <FormLabel mt={4}>Weigh-in Date</FormLabel>
+          <Input type="date" value={weighInDate} onChange={(e) => setWeighInDate(e.target.value)} />
         </FormControl>
         <FormControl>
           <FormLabel>Habit to Eliminate</FormLabel>
