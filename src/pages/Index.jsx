@@ -76,10 +76,10 @@ const Index = () => {
 
   return (
     <Container maxW="container.md" py={5}>
-      <Text fontSize="3xl" mb={4}>
+      <Text fontSize="3xl" mb={4} textAlign="center">
         Taylor-Yerokhin Challenge
       </Text>
-      <Button onClick={onOpen} colorScheme="teal">
+      <Button onClick={onOpen} colorScheme="teal" display="flex" justifyContent="center" mb={4}>
         How to Use
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
