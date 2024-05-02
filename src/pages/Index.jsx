@@ -13,6 +13,7 @@ const Index = () => {
   const [daysWithoutHabit, setDaysWithoutHabit] = useState(0);
   const [totalWeightLoss, setTotalWeightLoss] = useState(0);
   const [initialWeight, setInitialWeight] = useState(null);
+  const [weighInHistory, setWeighInHistory] = useState([]);
   const toast = useToast();
 
   useEffect(() => {
@@ -63,6 +64,7 @@ const Index = () => {
       setHabit(userData.habit);
       setTotalWeightLoss(userData.totalWeightLoss);
       setInitialWeight(userData.initialWeight);
+      setWeighInHistory(userData.weighInHistory || []);
     } else {
       toast({
         title: "Not Found",
@@ -120,6 +122,41 @@ const Index = () => {
         <Button leftIcon={<FaUserPlus />} colorScheme="green" onClick={handleLoad}>
           Load
         </Button>
+        {weighInHistory.length > 0 && (
+          <>
+            <Text fontSize="xl" mt={4}>
+              Weigh-In History
+            </Text>
+            <Box overflowX="auto">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Weigh-In</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {weighInHistory.map((entry, index) => (
+                    <tr key={index}>
+                      <td>{entry.date}</td>
+                      <td>{entry.weight} lbs</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Box>
+            <Text fontSize="xl" mt={4}>
+              Weigh-In Graph
+            </Text>
+            <Box>
+              {weighInHistory.map((entry, index) => (
+                <Text key={index}>
+                  {entry.date}: {Array(Math.round(entry.weight)).fill("█").join("")}
+                </Text>
+              ))}
+            </Box>
+          </>
+        )}
         <Box>
           <Text fontSize="xl">
             Progress of days without {habit}: {daysWithoutHabit} days
