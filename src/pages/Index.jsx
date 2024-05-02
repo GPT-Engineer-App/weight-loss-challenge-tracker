@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, Progress, useToast } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, Progress, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure } from "@chakra-ui/react";
 import { FaSave, FaUserPlus } from "react-icons/fa";
 import { client } from "lib/crud";
 
 const Index = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [name, setName] = useState("");
   const [endDate, setEndDate] = useState("");
   const [dailyWeight, setDailyWeight] = useState("");
@@ -75,6 +76,23 @@ const Index = () => {
 
   return (
     <Container maxW="container.md" py={5}>
+      <Text fontSize="3xl" mb={4}>
+        Taylor-Yerokhin Challenge
+      </Text>
+      <Button onClick={onOpen} colorScheme="teal">
+        How to Use
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>How to Use This App</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text mb={2}>1) To view past data, click on the 'Load' button after entering your name.</Text>
+            <Text>2) To enter new data, fill in the fields and click 'Save'.</Text>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
       <VStack spacing={4} align="stretch">
         <FormControl>
           <FormLabel>Name</FormLabel>
